@@ -4,8 +4,15 @@
   --titleButtonHover: #0077cc;
   --titleButtonActive: #014f86;
   --bodyBackgroundColor: #FFFFFF;
+  --sectionTitleBackgroundColor: #1c1c31;
+  --sectionTextColor: #252546;
+  --optionBackgroundColor: #FFFFFF;
   --footerBackgroundColor: #252546;
   --footerTextColor: #A7A7A7 ;
+  --buttonColor: #1c1c31;
+  --buttonTextColor: #FFFFFF;
+  --darkTextColor:  #FFFFFF;
+  --codeBoxBackground: #cccccc;
 }
 
 * {
@@ -144,33 +151,66 @@ body {
   background: var(--titleButtonActive);
 }
 
-.row{
+.content{
+  font-size: .75em;
+  margin: auto;
+  color: white;
+}
+
+#sections-container{
   width: 100%;
-  height: 30px;
-  margin: 5px;
 }
 
-.row .menuButton{
-  float: left;
+.section-headder{
+  background: var(--sectionTitleBackgroundColor);
+  margin-top: 1px;
+
 }
 
-.row p{
-  padding: 6px;
-  font-size: 10px;
+.section{
+  background: var(--optionBackgroundColor);
+  color: var(--sectionTextColor);
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: middle;
+}
+
+.hidden{
+  display: none;
+}
+
+.overview{
+  width : 100%;
+  height : 50px;
+  margin: auto;
+  text-align: center;
 }
 
 .menuButton{
   height: 30px;
-  width: 150px;
-  background-color: var(--darkBackgroundColor);
+  width: 100px;
+  color : var(--buttonTextColor);
+  background-color: var(--buttonColor);
+  margin-top: 5px;
+  text-align: center;
 }
 
+.menuButton:hover{
+  background-color: var(--titleButtonHover);
+};
+
 .menuButton p{
-  height: 100%;
-  width: 100%;
-  padding: 6px;
-  color: var(--darkTextColor);
-  font-size: 15px;
+  margin: auto;
+  color : var(--buttonTextColor);
+  text-align: center;
+}
+
+.codeExample{
+  background-color: var(--codeBoxBackground);
+  width : 100%;
+  margin-top: 5px;
 }
 
 footer{

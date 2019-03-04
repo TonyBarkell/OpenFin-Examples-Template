@@ -1,22 +1,31 @@
 <html>
     <head>
         <link rel="stylesheet" href="./app/css/main.css">
-        <script src="./app/scripts/main.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     </head>
     <body>
         <header>
             <div id="titleFrame">
                 <div id="titleBar">
-                    <p>OpenFin Support - API Examples</p>
-                    <img class="titleBarMinimize" onclick="minimiseWindow()" src="./app/shared/images/minimize.svg" alt="">
-                    <img class="titleBarRestore" onclick="restoreWindow()" src="./app/shared/images/restore.svg" alt="">
-                    <img class="titleBarMaximize" onclick="maximiseWindow()" src="./app/shared/images/maximize.svg" alt="">
-                    <img class="titleBarClose" onclick="closeWindow()" src="./app/shared/images/close-x.svg" alt="">
+                        <p>OpenFin Support - API Examples</p>
+                        <img class="titleBarMinimize" onclick="minimiseWindow()" src="./app/shared/images/minimize.svg" alt="">
+                        <img class="titleBarRestore" onclick="restoreWindow()" src="./app/shared/images/restore.svg" alt="">
+                        <img class="titleBarMaximize" onclick="maximiseWindow()" src="./app/shared/images/maximize.svg" alt="">
+                        <img class="titleBarClose" onclick="closeWindow()" src="./app/shared/images/close-x.svg" alt="">
                 </div>
             </div>
         </header>
         <main>
+            <div class="content">
 
+                <div class="overview">
+                    <p>This is where all the gumf goes</p>
+                </div>
+
+                <div id="sections-container">
+
+                </div>
+            </div>
         </main>
         <footer>
                 <p id="version-number-container">
@@ -26,5 +35,9 @@
                     show developer tools
                 </p>
         </footer>
+        <script src="./app/scripts/contentBuilder.js"></script>
+        <script src="./app/scripts/content.js"></script>
+        <script src="./app/scripts/main.js"></script>
+        <script src="./example-scripts/example-scripts.js"></script>
     </body>
 </html>

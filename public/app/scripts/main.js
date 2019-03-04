@@ -1,3 +1,5 @@
+
+
 async function minimiseWindow(){
     const finWindow = await fin.desktop.Window.getCurrent();
     return await finWindow.minimize();
@@ -35,21 +37,28 @@ async function setTrayIcon() {
     const iconUrl = "favicon.ico";
     const app = await fin.Application.getCurrent();
     return await app.setTrayIcon(iconUrl);
-}
+};
+
+function openBrowser(){
+    fin.desktop.System.launchExternalProcess({ 
+        path: `http://www.google.com` 
+    }, function(){}, function(err){console.log(err)}); 
+};
 
 //Once the DOM has loaded and the OpenFin API is ready
 function onMain() {
     fin.System.getVersion()
-        .then(version => {
-            const ofVersion = document.querySelector('#of-version');
-            ofVersion.innerText = version;	
-        }).catch(err => {
-            console.log("Error Retrieving Runtime version: " + err);
-        });
+    .then(version => {
+        const ofVersion = document.querySelector('#of-version');
+        ofVersion.innerText = version;	
+    }).catch(err => {
+        console.log("Error Retrieving Runtime version: " + err);
+    });
     setTrayIcon()
     .then(
         clickInfo => console.log(clickInfo)).catch(err => console.log(err)
     );
+    buildContent();
 };
 
 

@@ -7,7 +7,7 @@
         "frame": false,
         "autoShow": true,
         "defaultWidth": 500,
-        "defaultHeight": 200,
+        "defaultHeight": 133,
         "saveWindowState": false,
         "applicationIcon": "http://localhost:8080/favicon.ico",
         "cornerRounding": {
