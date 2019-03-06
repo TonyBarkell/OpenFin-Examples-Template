@@ -1,0 +1,67 @@
+<html>
+    <div class="paragraphContainer">
+
+        <h1>
+            Opening URLs with the system default Browser
+        </h1>
+
+        <h2>
+            Option 1: System.openUrlWithBrowser()
+        </h2>
+
+        <p>
+            The OpenFin API method System.openUrlWithBrowser() will open URLs with the local systems default browser.
+        </p>
+
+        <h3>
+            Example:
+        </h3>
+
+        
+        <p>
+            An example function named openUrlWithBrowser() is provided in this project in .\public\examamples\examples.js.  The button below calls the function and will Open our openUrlWithBrowser tutorial in this system default browser.
+        </p>
+
+        <div class="menuButton" id="section1Button" onClick="openUrlWithBrowserExample('http://cdn.openfin.co/docs/javascript/stable/tutorial-System.openUrlWithBrowser.html')">
+            <p>Open With Browser:</p>
+        </div>
+
+
+    </div>
+    
+    <div class="codeExample">
+        {<br />
+            &emsp;var url = 'http://cdn.openfin.co/docs/javascript/stable/tutorial-System.openUrlWithBrowser.html';
+            &emsp;fin.System.openUrlWithBrowser(url)<br />
+            &emsp;.then(() => console.log('Opened URL'))<br />
+            &emsp;.catch(err => console.log(err));<br />
+        }
+    </div>
+
+    <div class="paragraphContainer">
+        <h3>
+            References:
+        </h3>
+        <p>
+            API Documentation: <a href="http://cdn.openfin.co/docs/javascript/stable/tutorial-System.openUrlWithBrowser.html">System.openUrlWithBrowser()</a>
+        </p>
+    </div>
+
+    <h2>
+        Option 2: System.launchExternalProcess()
+    </h2>
+
+    <p>
+            The OpenFin API method System.launchExternalProcess() can be used with just the `path` parameter to launch a URL initialising the HTTP/HTTPS protocol handers, resulting in the systems default browser being initiated.
+    </p>
+
+    <div class="codeExample">
+        {<br />
+            &emsp;fin.System.launchExternalProcess({ <br />
+                &emsp;&emsp;path: 'http://www.openfin.co' <br />
+            &emsp;})<br />
+            &emsp;.then(processIdentity => console.log(processIdentity))<br />
+            &emsp;.catch(err => console.log(err));<br />
+        }
+    </div>
+</html>

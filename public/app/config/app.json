@@ -16,7 +16,8 @@
         }
     },
     "runtime": {
-        "version": "stable"
+        "version": "stable",
+        "arguments" : "--security-realm=APIEXAMPLE"
     },
     "shortcut": {
         "icon": "http://localhost:8080/favicon.ico"
