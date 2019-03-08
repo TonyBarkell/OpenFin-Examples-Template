@@ -1,0 +1,45 @@
+<html>
+
+    <h2>
+            Opening URLs with the system default browser using System.launchExternalProcess()
+    </h2>
+
+    <h3>
+        Overview:
+    </h3>
+
+    <p>
+        The OpenFin API method System.launchExternalProcess() can be used with just the `path` parameter to launch a URL initialising the HTTP/HTTPS protocol handers, resulting in the systems default browser being initiated.
+    </p>
+
+    <h3>
+        Example:
+    </h3>
+
+    <p>
+        An example function named launchExternalProcessExample() is provided in this project in .\public\examamples\examples.js.  The button below calls the function and will Open the 'launchExternalProcess' tutorial in this systems default browser.
+    </p>
+
+    <div class="menuButton" id="launchExternalProcessExampleButton" onClick="launchExternalProcessExample('http://cdn.openfin.co/docs/javascript/stable/System.html#launchExternalProcess')">
+        <p>Open In Browser</p>
+    </div>
+
+    <div class="codeExample">
+        {<br />
+            &emsp; url = 'http://cdn.openfin.co/docs/javascript/stable/System.html#launchExternalProcess'
+            &emsp;fin.System.launchExternalProcess({ <br />
+                &emsp;&emsp;path: url <br />
+            &emsp;})<br />
+            &emsp;.then(processIdentity => console.log(processIdentity))<br />
+            &emsp;.catch(err => console.log(err));<br />
+        }
+    </div>
+
+    <h3>
+        References:
+    </h3>
+    <p>
+        API Documentation: <a href="http://cdn.openfin.co/docs/javascript/stable/System.html#launchExternalProcess">System.launchExternalProcess()</a>
+    </p>
+
+</html>

@@ -1,22 +1,30 @@
 async function buildSectionFromFile(sectionHtmlFilePath, sectionName, sectionId){
-    var container = document.createElement("div");
+    return new Promise(async function(resolve, reject) {
+        var container = document.createElement("div");
 
-    var sectionHeadder = buildSectionHeadder(sectionName);
-    container.appendChild(sectionHeadder);
-    sectionHeadder.addEventListener("click", function(){
-        setActiveControl(sectionId);
+        var sectionHeadder = buildSectionHeadder(sectionName);
+        container.appendChild(sectionHeadder);
+        sectionHeadder.addEventListener("click", function(){
+            setActiveControl(sectionId);
+        });
+        var sectionContent;
+        await getSectionFromFile(sectionHtmlFilePath).then(function(section){
+            sectionContent = section;
+        });
+        sectionContent.id = sectionId;
+        if(sectionId != "overview"){
+            sectionContent.classList.add("hidden");
+        }
+        container.appendChild(sectionContent);
+        container.addEventListener("resize", function(){
+            console.log(container.offsetHeight)
+        });
+        document.getElementById("sections-container").appendChild(container);
+        console.log("container.offsetHeight " + container.offsetHeight);
+        await animateWindow(container.offsetHeight)
+        .catch(err => console.error(err));
+        resolve();
     });
-    var sectionContent;
-    await getSectionFromFile(sectionHtmlFilePath).then(function(section){
-        sectionContent = section;
-    });
-    sectionContent.id = sectionId;
-    sectionContent.classList.add("hidden");
-    container.appendChild(sectionContent);
-    container.addEventListener("resize", function(){
-        console.log(container.offsetHeight)
-    });
-    document.getElementById("sections-container").appendChild(container);
 };
 
 function setActiveControl(elemId){
@@ -78,5 +86,5 @@ function getSectionFromFile(filePath){
             resolve(section);
         };
         xhr.send();
-    })
+    });
 };

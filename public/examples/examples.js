@@ -1,12 +1,12 @@
-function openUrlWithBrowser(){
+function openUrlWithBrowserExample(){
     fin.System.openUrlWithBrowser('http://cdn.openfin.co/docs/javascript/stable/tutorial-System.openUrlWithBrowser.html')
     .then(() => console.log('Opened URL'))
     .catch(err => console.log(err));
 };
 
-function launchExternalProcessDefault(){
+function launchExternalProcessExample(url){
     fin.System.launchExternalProcess({ 
-        path: 'http://www.openfin.co' 
+        path: url
     }).then(processIdentity => console.log(processIdentity))
     .catch(err => console.log(err));
 };

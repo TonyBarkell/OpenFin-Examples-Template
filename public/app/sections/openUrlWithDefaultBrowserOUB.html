@@ -1,0 +1,43 @@
+<html>
+
+    <h2>
+        Opening URLs with the system default browser using System.openUrlWithBrowser()
+    </h2>
+
+    <h3>
+        Overview:
+    </h3>
+
+    <p>
+        The OpenFin API method System.openUrlWithBrowser() opens URLs using the local systems default browser.
+    </p>
+
+    <h3>
+        Example:
+    </h3>
+    
+    <p>
+        An example function named openUrlWithBrowser() is provided in this project in .\public\examamples\examples.js.  The button below calls the function and will Open the 'openUrlWithBrowser' tutorial in this systems default browser.
+    </p>
+
+    <div class="menuButton" id="openUrlWithBrowserExampleButton" onClick="openUrlWithBrowserExample('http://cdn.openfin.co/docs/javascript/stable/tutorial-System.openUrlWithBrowser.html')">
+        <p>Open In Browser</p>
+    </div>
+    
+    <div class="codeExample">
+        {<br />
+            &emsp;var url = 'http://cdn.openfin.co/docs/javascript/stable/tutorial-System.openUrlWithBrowser.html';
+            &emsp;fin.System.openUrlWithBrowser(url)<br />
+            &emsp;.then(() => console.log('Opened URL'))<br />
+            &emsp;.catch(err => console.log(err));<br />
+        }
+    </div>
+
+    <h3>
+        References:
+    </h3>
+    <p>
+        API Documentation: <a href="http://cdn.openfin.co/docs/javascript/stable/tutorial-System.openUrlWithBrowser.html">System.openUrlWithBrowser()</a>
+    </p>
+
+</html>
