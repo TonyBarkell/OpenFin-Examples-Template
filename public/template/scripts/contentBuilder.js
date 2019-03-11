@@ -11,6 +11,9 @@ async function buildSectionFromFile(sectionHtmlFilePath, sectionName, sectionId)
         await getSectionFromFile(sectionHtmlFilePath).then(function(section){
             sectionContent = section;
         });
+
+
+
         sectionContent.id = sectionId;
         if(sectionId != "overview"){
             sectionContent.classList.add("hidden");
@@ -61,8 +64,6 @@ async function animateWindow(size) {
     return win.animate(transitions);
 }
 
-
-
 function buildSectionHeadder(text){
     container = document.createElement("div");
     container.classList.add("section-headder");
@@ -79,10 +80,21 @@ function getSectionFromFile(filePath){
         xhr.onreadystatechange= function() {
             if (this.readyState!==4) return;
             if (this.status!==200) return;
-            html = this.responseText;
+            var html = this.responseText;
             section = document.createElement("div");
             section.classList.add( "section" );
             section.innerHTML = html;
+            console.log(section.innerHTML.toString());
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(section.innerHTML.toString(),"text/xml");
+            try{    
+                var title = xmlDoc.getElementsByTagName('title')[0].childNodes[0].nodeValue;
+                console.log(title);
+            }catch(err){
+                console.log("error!! wa wa " + err);
+            }
+     
+
             resolve(section);
         };
         xhr.send();

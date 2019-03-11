@@ -1,4 +1,4 @@
-
+var serverPort;
 
 async function minimiseWindow(){
     const finWindow = await fin.desktop.Window.getCurrent();
@@ -22,7 +22,8 @@ async function maximiseWindow(){
 
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof fin != 'undefined') {
-	    fin.desktop.main(onMain);
+        //fin.desktop.main(onMain);
+        onMain();
     } else {
         ofVersion.innerText = 'OpenFin is not available';
     }
@@ -39,18 +40,31 @@ async function setTrayIcon() {
     return await app.setTrayIcon(iconUrl);
 };
 
-function openBrowser(){
-    fin.desktop.System.launchExternalProcess({ 
-        path: `http://www.google.com` 
-    }, function(){}, function(err){console.log(err)}); 
-};
+async function openChildTemplate(windowName, ) {
+    const winOption = {
+        name:'windowName',
+        "frame": false,
+        "autoShow": true,
+        "defaultWidth": 500,
+        "defaultHeight": 53,
+        "saveWindowState": false,
+        url: 'http://localhost:' + serverPort + '/index.html?sections=1;2',
+    };
+    return await fin.Window.create(winOption);
+}
 
 //Once the DOM has loaded and the OpenFin API is ready
 function onMain() {
+    console.log("on main");
     fin.System.getVersion()
     .then(version => {
         const ofVersion = document.querySelector('#of-version');
-        ofVersion.innerText = version;	
+        ofVersion.innerText = version;
+        fin.Window.getCurrentSync().getOptions()
+            .then(opts => {
+                serverPort = opts.customData;
+                console.log("Server Port: " + serverPort);
+            }).catch(err => console.log(err));
     }).catch(err => {
         console.log("Error Retrieving Runtime version: " + err);
     });

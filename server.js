@@ -9,6 +9,7 @@ var target;
 app.use(express.static(__dirname + '/public'));
 
 portfinder.getPortPromise().then((port) => {
+    serverPort = port;
     target = "http://localhost:" + port;
     app.listen(port, () =>{ 
         console.log("Server started at: " + target);
@@ -29,14 +30,12 @@ app.get('/app.json', (req, res) => {
 });
 
 app.get('/index.html', (req, res) => {
-    index = path.resolve("./public/app/index.html");
-    console.log("Serving index.html:");
-    console.log(index);
+    index = path.resolve("./public/template/index.html");
     res.sendFile(index);
 });
 
 app.get('/favicon.ico', (req, res) => {
-    icon = path.resolve("./public/app/favicon.ico");
+    icon = path.resolve("./public/template/favicon.ico");
     res.sendFile(icon );
 });
 
@@ -45,5 +44,6 @@ function buildManifest(){
     manifest.startup_app.url = target + "/index.html";
     manifest.startup_app.applicationIcon = target + "/favicon";
     manifest.shortcut = target + "/favicon";
+    manifest.startup_app.customData = serverPort;
     return manifest;
 };
