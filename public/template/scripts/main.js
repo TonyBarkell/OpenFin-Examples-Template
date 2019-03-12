@@ -40,17 +40,27 @@ async function setTrayIcon() {
     return await app.setTrayIcon(iconUrl);
 };
 
-async function openChildTemplate(windowName, ) {
+async function openChildTemplate(windowName, sections) {
+    var url = 'http://localhost:' + serverPort + '/index.html?sections=';
+    for(section of sections){
+        console.log(section);
+        url = url.concat(section);
+    }
+    console.log(url);
     const winOption = {
-        name:'windowName',
+        name: windowName,
         "frame": false,
         "autoShow": true,
         "defaultWidth": 500,
         "defaultHeight": 53,
         "saveWindowState": false,
-        url: 'http://localhost:' + serverPort + '/index.html?sections=1;2',
+        url: url,
     };
     return await fin.Window.create(winOption);
+}
+
+function getServerPort(){
+    return serverPort;
 }
 
 //Once the DOM has loaded and the OpenFin API is ready

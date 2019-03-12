@@ -1,7 +1,7 @@
 {
     "devtools_port": 9090,
     "startup_app": {
-        "url": "http://localhost:8080/index.html",
+        "url": "http://localhost:8080/index.html?sections=overview;linkDefaultBehavior",
         "name": "OpenFin Support API Examples",
         "uuid": "API Example Template",
         "frame": false,
@@ -17,7 +17,7 @@
     },
     "runtime": {
         "version": "stable",
-        "arguments" : "--security-realm=APIEXAMPLE"
+        "arguments" : ""
     },
     "shortcut": {
         "icon": "http://localhost:8080/favicon.ico"

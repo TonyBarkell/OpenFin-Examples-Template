@@ -1,31 +1,16 @@
+var sectionCounter = 0;
+var idCounter = 0;
 async function buildSectionFromFile(sectionHtmlFilePath, sectionName, sectionId){
     return new Promise(async function(resolve, reject) {
-        var container = document.createElement("div");
-
-        var sectionHeadder = buildSectionHeadder(sectionName);
-        container.appendChild(sectionHeadder);
-        sectionHeadder.addEventListener("click", function(){
-            setActiveControl(sectionId);
-        });
-        var sectionContent;
+        var container;
         await getSectionFromFile(sectionHtmlFilePath).then(function(section){
-            sectionContent = section;
-        });
-
-
-
-        sectionContent.id = sectionId;
-        if(sectionId != "overview"){
-            sectionContent.classList.add("hidden");
-        }
-        container.appendChild(sectionContent);
-        container.addEventListener("resize", function(){
-            console.log(container.offsetHeight)
+            container = section;
         });
         document.getElementById("sections-container").appendChild(container);
-        console.log("container.offsetHeight " + container.offsetHeight);
         await animateWindow(container.offsetHeight)
         .catch(err => console.error(err));
+        sectionCounter++;
+        idCounter++;
         resolve();
     });
 };
@@ -74,6 +59,7 @@ function buildSectionHeadder(text){
 
 function getSectionFromFile(filePath){
     return new Promise(function(resolve, reject) {
+        var container = document.createElement("div");
         var section;
         xhr = new XMLHttpRequest();
         xhr.open('GET', filePath, true);
@@ -81,22 +67,48 @@ function getSectionFromFile(filePath){
             if (this.readyState!==4) return;
             if (this.status!==200) return;
             var html = this.responseText;
+            var title;
+            var id;
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(html,"text/xml");
+            try{
+                title = xmlDoc.getElementsByTagName('title')[0].childNodes[0].nodeValue;
+            }catch(err){
+                title = "section " + sectionCounter;
+            }
+            try{
+                id = xmlDoc.getElementById('id').innerHTML;     
+            }catch(err){
+                id = "id" + sectionCounter;
+            }
+            var sectionHeadder = buildSectionHeadder(title);
+            container.appendChild(sectionHeadder);
+
             section = document.createElement("div");
             section.classList.add( "section" );
             section.innerHTML = html;
-            console.log(section.innerHTML.toString());
-            var parser = new DOMParser();
-            var xmlDoc = parser.parseFromString(section.innerHTML.toString(),"text/xml");
-            try{    
-                var title = xmlDoc.getElementsByTagName('title')[0].childNodes[0].nodeValue;
-                console.log(title);
-            }catch(err){
-                console.log("error!! wa wa " + err);
-            }
-     
-
-            resolve(section);
+            container.appendChild(section);
+            section.id = id;
+            if(id != "overview"){
+                section.classList.add("hidden");
+            };
+            sectionHeadder.addEventListener("click", function(){
+                setActiveControl(id);
+            });
+            resolve(container);
         };
-        xhr.send();
+        xhr.send();   
     });
+};
+
+async function buildContent(){
+    sections = new URLSearchParams(window.location.search).get('sections');
+    if( sections ){
+        var sectionArray = sections.split(';')
+        for(section of sectionArray){
+            console.log("Building " + section);
+            await buildSectionFromFile("./app/sections/" + section + ".html");
+            console.log(section + " built")
+        }
+    }
 };

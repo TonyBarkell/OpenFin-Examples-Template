@@ -40,8 +40,10 @@ app.get('/favicon.ico', (req, res) => {
 });
 
 function buildManifest(){
-    manifest = require("./public/app/config/app.json");
-    manifest.startup_app.url = target + "/index.html";
+    var manifest = require("./public/app/config/app.json");
+    var query = manifest.startup_app.url.substring(manifest.startup_app.url.indexOf('?'));
+    console.log(query);
+    manifest.startup_app.url = target + "/index.html" + query;
     manifest.startup_app.applicationIcon = target + "/favicon";
     manifest.shortcut = target + "/favicon";
     manifest.startup_app.customData = serverPort;
